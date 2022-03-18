@@ -64,6 +64,7 @@ public class ReportAction extends ActionBase {
         //一覧画面を表示
         forward(ForwardConst.FW_REP_INDEX);
     }
+
     /**
      * 新規登録画面を表示する
      * @throws ServletException
@@ -82,6 +83,7 @@ public class ReportAction extends ActionBase {
         forward(ForwardConst.FW_REP_NEW);
 
     }
+
     /**
      * 新規登録を行う
      * @throws ServletException
@@ -138,6 +140,7 @@ public class ReportAction extends ActionBase {
             }
         }
     }
+
     /**
      * 詳細画面を表示する
      * @throws ServletException
@@ -160,4 +163,34 @@ public class ReportAction extends ActionBase {
             forward(ForwardConst.FW_REP_SHOW);
         }
     }
+
+    /**
+     * 編集画面を表示する
+     * @throws ServletException
+     * @throws IOExeption
+     */
+
+    public void edit() throws ServletException, IOException {
+
+        //idを条件に日報データを取得する
+        ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        //セッションからログイン中の従業員情報を取得する
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+        if (rv == null || ev.getId() != rv.getEmployee().getId()) {
+            //該当のデータが存在しない。または
+            //ログインしている従業員が日報の作成者でない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+        } else {
+            putRequestScope(AttributeConst.TOKEN, getTokenId());//CFRF対策用トークン
+            putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+
+            forward(ForwardConst.FW_REP_EDIT);//編集画面を表示
+
+        }
+
+    }
+
 }
