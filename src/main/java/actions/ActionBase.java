@@ -46,7 +46,8 @@ public abstract class ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    public abstract void process() throws ServletException, IOException;
+          public abstract void process() throws ServletException, IOException;
+    
 
     /**
      * パラメータのcommandの値に該当するメソッドを実行する
@@ -241,6 +242,7 @@ public abstract class ActionBase {
     protected <R> R getContextScope(PropertyConst key) {
         return (R) context.getAttribute(key.getValue());
     }
+
     /**
      * 新規登録画面を表示する
      * @throws ServletException
@@ -254,6 +256,5 @@ public abstract class ActionBase {
         //新規登録画面を表示
         forward(ForwardConst.FW_EMP_NEW);
     }
-
 
 }

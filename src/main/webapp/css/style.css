@@ -27,6 +27,8 @@ h2 {
     margin-bottom: 15px;
 }
 
+
+
 li {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -153,4 +155,8 @@ table#report_list .report_action {
 }
 pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}
+
+h3 {
+    font-size: larger;
 }
